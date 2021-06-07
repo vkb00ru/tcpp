@@ -6,6 +6,7 @@
 
 using namespace std;
 class Zakaz;
+class client;
 class Zakaz
 {
 	int id;
@@ -50,6 +51,39 @@ public:
 private:
 
 };
+void Manager::addWaitTov(int id)
+{
+	waitIdTov[countTov] = id;
+	countTov++;
+}
+void Manager::waitList()
+{
+	cout << "WaitList: " << endl;
+	for (int i(0); i < getcountTov(); i++)
+		cout << waitIdTov[i] << " ";
+	cout << endl;
+}
+void Manager::checkQuestions()
+{
+	cout << getquestions() << endl;
+}
+string Manager::confirmZak()
+{
+	int id;
+	waitList();
+	cout << "Input id for confirm: " << endl;
+	cin >> id;
+	for (int i(0); i < 5; i++)
+		if (waitIdTov[i] == id)
+		{
+			waitIdTov[i] = 0;
+			string mes;
+			mes = "Your zakaz " + to_string(id) + " confirmed";
+			return mes;
+			//c1.setEmail(mes);
+		}
+	return "";
+}
 class client
 {
 	friend class Manager;
@@ -72,24 +106,150 @@ public:
 
 
 };
-void Manager::addWaitTov(int id)
+class Tov
 {
-	waitIdTov[countTov] = id;
-	countTov++;
+	int id;
+	int price;
+	string name;
+
+public:
+	int getPrice() { return price; };
+	void setPrice(int p) { price = p; };
+
+};
+
+// string client::checkEmail()
+//{
+//
+//}
+void client::Buy(Manager& m1)
+{
+	for (int i(0); i < 5; i++)
+	{
+		cout << "Set id Tovara: or 0 for exit " << endl;
+		cin >> id;
+		if (id == 0)
+			break;
+		z.setidTov(id);
+		cout << endl;
+	}
+
+
+
+
 }
-void Manager::waitList()
+void client::checkout(Manager& m1)
 {
-	cout << "WaitList: " << endl;
-	for (int i(0); i < getcountTov(); i++)
-		cout << waitIdTov[i] << " ";
+	int idzak;
+	Buy(m1);
+
+	cout << "Your Product: " << endl;
+	for (int i(0); i < z.getcountTov(); i++)
+		cout << z.getidTov(i) << " ";
 	cout << endl;
+	z.setidClient(this->id);
+	cout << "Input idZakaza " << endl;
+	cin >> idzak;
+	z.setid(idzak);
+	m1.addWaitTov(z.getid());
+	//m1.waitList();
+
 }
-void Manager::checkQuestions()
+void client::question(Manager* m)
 {
-	cout << getquestions() << endl;
+	string s;
+	cin >> s;
+	m->setquestions(s);
+
+}
+
+client::client()
+{
+}
+
+client::~client()
+{
 }
 void main()
 {
-	
+	client c1;
+	Manager m("");
+	Manager* m1 = &m;
+
+	//
+	int n;
+	while (true)
+	{
+		cout << "Chose role: " << endl;
+		cout << "1: Client " << endl;
+		cout << "2: Manager " << endl;
+		cin >> n;
+		if (n == 1)
+		{
+			while (true)
+			{
+				int k;
+				cout << "You client!" << endl;
+				cout << "1: Question for manager" << endl;
+				cout << "2: Checkout" << endl;
+				cout << "3: Ceck Email" << endl;
+				cout << "9: Exit" << endl;
+				cin >> k;
+				switch (k)
+				{
+				case 1:
+					cout << "Input message: " << endl;
+					c1.question(m1);
+					break;
+				case 2:
+
+					c1.checkout(*m1);
+					break;
+				case 3: cout << c1.getEmail();
+				default:
+					break;
+				}
+				if (k == 9)
+					break;
+			}
+		}
+		if (n == 2)
+		{
+			while (true)
+			{
+				int k;
+				cout << "You Manager!" << endl;
+				cout << "1: Check questions" << endl;
+				cout << "2: Confirm Zakaz" << endl;
+
+				cout << "9: Exit" << endl;
+				cin >> k;
+				switch (k)
+				{
+				case 1:
+					cout << "New message: " << endl;
+					m1->checkQuestions();
+					break;
+				case 2:
+					m1->waitList();
+					c1.setEmail(m.confirmZak());
+					break;
+				case 3:
+
+					//m1->confirmZak(m1, c1);
+				default:
+					break;
+				}
+				if (k == 9)
+					break;
+			}
+
+		}
+
+	}
+
+
+
+	//m1->checkQuestions();
 	system("pause");
 }
