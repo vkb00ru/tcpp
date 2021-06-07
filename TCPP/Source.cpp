@@ -5,7 +5,7 @@
 
 
 using namespace std;
-
+class Zakaz;
 class Zakaz
 {
 	int id;
@@ -27,5 +27,6 @@ public:
 };
 void main()
 {
+	int i;
 	system("pause");
 }
