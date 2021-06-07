@@ -50,6 +50,28 @@ public:
 private:
 
 };
+class client
+{
+	friend class Manager;
+	int id;
+	Zakaz z;
+	string Email = "";
+public:
+	string getEmail() { return Email; };
+	void setEmail(string s) { Email += s + " "; };
+	void goClient();
+	void question(Manager* m);
+	string checkEmail();
+	void searchTov();
+	void sortTov();
+	void Buy(Manager& m1);
+	void checkout(Manager& m1);
+	client();
+	~client();
+
+
+
+};
 void Manager::addWaitTov(int id)
 {
 	waitIdTov[countTov] = id;
