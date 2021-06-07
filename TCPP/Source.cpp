@@ -25,6 +25,47 @@ public:
 	void setidClient(int i) { idClient = i; };
 	void setid(int i) { id = i; };
 };
+class Manager
+{
+	friend class client;
+
+	string questions = "";
+	int waitIdTov[5];
+	int countTov = 0;
+public:
+	void setquestions(string s) { questions = s; };
+	string getquestions() { return questions; };
+	int getcountTov() { return countTov; };
+
+	void waitList();
+	void addWaitTov(int id);
+	string confirmZak();
+	void lookTov();
+	void checkQuestions();
+	void podtverOpl();
+	void setStat();
+	Manager(string s) :questions(s) {};
+
+
+private:
+
+};
+void Manager::addWaitTov(int id)
+{
+	waitIdTov[countTov] = id;
+	countTov++;
+}
+void Manager::waitList()
+{
+	cout << "WaitList: " << endl;
+	for (int i(0); i < getcountTov(); i++)
+		cout << waitIdTov[i] << " ";
+	cout << endl;
+}
+void Manager::checkQuestions()
+{
+	cout << getquestions() << endl;
+}
 void main()
 {
 	
