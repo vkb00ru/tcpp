@@ -27,6 +27,8 @@ public:
 };
 void main()
 {
+	string s;
+	s = "sss";
 	int i;
 	system("pause");
 }
