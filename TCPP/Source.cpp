@@ -27,5 +27,7 @@ public:
 };
 void main()
 {
+	string s;
+	s = "awww";
 	system("pause");
 }
